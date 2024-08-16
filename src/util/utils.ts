@@ -61,6 +61,7 @@ export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
 
         if (hasArrowAttribute) {
           count++;
+          // fs.unlinkSync(filePath);
           fs.appendFileSync(`${outDir}/output.txt`, `${file}\n`);
           console.log(`Атрибут в файле ${file}`);
         }
