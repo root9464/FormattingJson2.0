@@ -8,3 +8,7 @@ export const renameAttributes: Record<string, string> = {
 };
 
 export const imageUrl: string = `https://gateway.pinata.cloud`;
+
+export const outDir: string = './out' 
+
+export const outputFile: string = `${outDir}/output.txt`

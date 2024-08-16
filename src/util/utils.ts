@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { outDir } from '../config/config';
 import type { Data, NFT } from "../types/types";
 
 export function checkDuplicates(jsonDir: string): Promise<number> {
@@ -39,6 +40,10 @@ export function checkDuplicates(jsonDir: string): Promise<number> {
 
 export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
   return new Promise((resolve, reject) => {
+    if (!fs.existsSync(outDir)) {
+      fs.mkdirSync(outDir);
+    }
+
     fs.readdir(jsonDir, (err, files) => {
       if (err) {
         reject(err);
@@ -56,6 +61,7 @@ export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
 
         if (hasArrowAttribute) {
           count++;
+          fs.appendFileSync(`${outDir}/output.txt`, `${file}\n`);
           console.log(`Атрибут в файле ${file}`);
         }
       });
@@ -64,6 +70,7 @@ export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
     });
   });
 }
+
 
 
 export function processJsonFiles(jsonDir: string, removeAttributes: string[], renameAttributes: Record<string, string>, imageUrl: string): void {
@@ -91,4 +98,25 @@ export function processJsonFiles(jsonDir: string, removeAttributes: string[], re
     });
 
   console.log("Обработка файлов завершена!");
+}
+
+export function deleteFilesWithArrowAttribute(jsonDir: string, outputFile: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    fs.readFile(outputFile, 'utf8', (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      const fileNamesToDelete = data.trim().split('\n');
+
+      fileNamesToDelete.forEach((fileName) => {
+        const filePath = path.join(jsonDir, fileName);
+        fs.unlinkSync(filePath);
+        console.log(`Удален файл ${filePath}`);
+      });
+
+      resolve();
+    });
+  });
 }
