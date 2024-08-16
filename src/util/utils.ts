@@ -3,6 +3,12 @@ import * as path from 'path';
 import { outDir } from '../config/config';
 import type { Data, NFT } from "../types/types";
 
+
+/*
+  Проверка на дубликаты в json-файлах
+*/
+
+
 export function checkDuplicates(jsonDir: string): Promise<number> {
   return new Promise((resolve, reject) => {
     fs.readdir(jsonDir, (err, files) => {
@@ -37,6 +43,13 @@ export function checkDuplicates(jsonDir: string): Promise<number> {
     });
   });
 }
+
+/*
+  Обрабатывает файлы json в папке jsonDir
+  Считает количество файлов с атрибутом "arrow"
+  Выводит количество файлов в консоль
+  Записывает имена файлов в output.txt
+*/
 
 export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -73,6 +86,11 @@ export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
 }
 
 
+/*
+  Обрабатывает файлы json в папке jsonDir
+  Удаляет атрибуты "Background" и "Spruce"
+  Добавляет numberImage в каждый файл
+*/
 
 export function processJsonFiles(jsonDir: string, removeAttributes: string[], renameAttributes: Record<string, string>, imageUrl: string): void {
   fs.readdirSync(jsonDir)
@@ -100,6 +118,10 @@ export function processJsonFiles(jsonDir: string, removeAttributes: string[], re
 
   console.log("Обработка файлов завершена!");
 }
+
+/*
+  Удаляет файлы записанные в output.txt с атрибутом "arrow"
+*/
 
 export function deleteFilesWithArrowAttribute(jsonDir: string, outputFile: string): Promise<void> {
   return new Promise((resolve, reject) => {
