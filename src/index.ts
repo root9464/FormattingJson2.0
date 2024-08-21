@@ -1,4 +1,4 @@
-import { findNFTsByAttributes } from './util/utils';
+import { swapAttributesInJsonFiles } from './util/utils';
 
 const jsonDir = 'D:/Рабочая область/json'; //D:/Рабочая область/json.copy
 
@@ -19,7 +19,6 @@ const attributes = {
   'Diamonds == Share or revenue': '0',
 };
 
-const jsonObjects = findNFTsByAttributes(jsonDir, attributes);
-console.log(jsonObjects, '');
+swapAttributesInJsonFiles(jsonDir);
 
 // processJsonFiles(jsonDir, removeAttributes, renameAttributes, imageUrl);

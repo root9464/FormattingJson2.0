@@ -204,3 +204,30 @@ export function updateArrowAttribute(jsonDir: string) {
     });
   });
 }
+
+export function swapAttributesInJsonFiles(jsonDir: string) {
+  fs.readdir(jsonDir, (err, files) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    files.forEach((file) => {
+      const filePath = path.join(jsonDir, file);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const jsonObject: NFT = JSON.parse(fileContent);
+
+      const attributes = jsonObject.attributes;
+      const diamondsIndex = attributes.findIndex((attr) => attr.trait_type === 'Diamonds == Share or revenue');
+      const lineDotsIndex = attributes.findIndex((attr) => attr.trait_type === 'Line dots == Refferals');
+
+      if (diamondsIndex !== -1 && lineDotsIndex !== -1) {
+        [attributes[diamondsIndex], attributes[lineDotsIndex]] = [attributes[lineDotsIndex], attributes[diamondsIndex]];
+      }
+
+      const updatedFileContent = JSON.stringify(jsonObject, null, 2);
+      fs.writeFileSync(filePath, updatedFileContent);
+      console.log(`Изменены атрибуты в файле ${file}`);
+    });
+  });
+}
