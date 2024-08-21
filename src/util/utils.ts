@@ -177,3 +177,30 @@ export function findNFTsByAttributes(directory: string, attributes: { [traitType
 
   return matchingNFTs;
 }
+
+export function updateArrowAttribute(jsonDir: string) {
+  fs.readdir(jsonDir, (err, files) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    files.forEach((file) => {
+      const filePath = path.join(jsonDir, file);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const jsonObject: NFT = JSON.parse(fileContent);
+
+      const arrowAttribute = jsonObject.attributes.find((attribute) => attribute.trait_type === 'arrow');
+
+      if (arrowAttribute) {
+        const currentValue = arrowAttribute.value;
+        const newValue = `arrow_${parseInt(currentValue.split('_')[1], 10) - 1}`;
+        arrowAttribute.value = newValue;
+        console.log(`Updated arrow attribute in file ${file} to ${newValue}`);
+      }
+
+      const updatedFileContent = JSON.stringify(jsonObject, null, 2);
+      fs.writeFileSync(filePath, updatedFileContent);
+    });
+  });
+}
