@@ -1,7 +1,7 @@
-type NFTAttribute = {
+export type NFTAttribute = {
   trait_type: string;
   value: string;
-}
+};
 
 export type NFT = {
   name: string;
@@ -12,8 +12,7 @@ export type NFT = {
   date: number;
   attributes: NFTAttribute[];
   compiler: string;
-}
-
+};
 
 export interface Data {
   name: string;

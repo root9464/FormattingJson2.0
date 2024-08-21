@@ -1,11 +1,15 @@
-import { outputFile } from "./config/config";
-import { deleteFilesWithArrowAttribute } from "./util/utils";
+import { findNFTsByAttributes } from './util/utils';
 
+const jsonDir = 'D:/Рабочая область/json';
 
-const jsonDir = 'C:/Users/Rооt/OneDrive/Desktop/Projects/Other/Typescript/Formatingjson2/json';
+// Поиск NFT по атрибутам
+const attributes = {
+  northern: 'northern_0', //Radiance == Less comission
+  snow: 'snow_0', //Snowdrifts == DCA
+  diamon: 'diamond_0', //Diamonds == Share or revenue
+  arrow: 'arrow_5', //Line dots == Refferals
+  stars: 'stars_0', //Stars == Priority
+};
 
-deleteFilesWithArrowAttribute(jsonDir, outputFile)
-
-// countFilesWithArrowAttribute(jsonDir).then((count) => {
-//   console.log(`Количество файлов с атрибутом "arrow": ${count}`);
-// })
+const jsonObjects = findNFTsByAttributes(jsonDir, attributes);
+console.log(jsonObjects, '');

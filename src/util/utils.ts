@@ -1,13 +1,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { outDir } from '../config/config';
-import type { Data, NFT } from "../types/types";
-
+import type { Data, NFT } from '../types/types';
 
 /*
   Проверка на дубликаты в json-файлах
 */
-
 
 export function checkDuplicates(jsonDir: string): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -70,7 +68,9 @@ export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const jsonObject: NFT = JSON.parse(fileContent);
 
-        const hasArrowAttribute = jsonObject.attributes.some((attribute) => attribute.trait_type === 'arrow' && attribute.value === 'arrow_0');
+        const hasArrowAttribute = jsonObject.attributes.some(
+          (attribute) => attribute.trait_type === 'arrow' && attribute.value === 'arrow_0',
+        );
 
         if (hasArrowAttribute) {
           count++;
@@ -85,38 +85,45 @@ export function countFilesWithArrowAttribute(jsonDir: string): Promise<number> {
   });
 }
 
-
 /*
   Обрабатывает файлы json в папке jsonDir
   Удаляет атрибуты "Background" и "Spruce"
   Добавляет numberImage в каждый файл
 */
 
-export function processJsonFiles(jsonDir: string, removeAttributes: string[], renameAttributes: Record<string, string>, imageUrl: string): void {
+export function processJsonFiles(
+  jsonDir: string,
+  removeAttributes: string[],
+  renameAttributes: Record<string, string>,
+  imageUrl: string,
+): void {
   fs.readdirSync(jsonDir)
-    .filter((filename) => filename.endsWith(".json"))
+    .filter((filename) => filename.endsWith('.json'))
     .forEach((filename) => {
       const filePath = path.join(jsonDir, filename);
-      const data: Data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+      const data: Data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
       data.attributes = data.attributes
-        .filter(({ trait_type }) => !removeAttributes.includes(trait_type) && trait_type !== "bacground" && trait_type !== "spruce")
+        .filter(
+          ({ trait_type }) =>
+            !removeAttributes.includes(trait_type) && trait_type !== 'bacground' && trait_type !== 'spruce',
+        )
         .map((attr) => ({
           trait_type: renameAttributes[attr.trait_type] || attr.trait_type,
-          value: attr.value.replace(/^.*_/, ""),
+          value: attr.value.replace(/^.*_/, ''),
         }));
 
-      data.image = `${imageUrl}/${path.basename(filename, ".json")}.png`;
+      data.image = `${imageUrl}/${path.basename(filename, '.json')}.png`;
       delete data.dna;
       delete data.edition;
       delete data.date;
       delete data.compiler;
-      data.numberImage = path.basename(filename, ".json");
+      data.numberImage = path.basename(filename, '.json');
 
       fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
     });
 
-  console.log("Обработка файлов завершена!");
+  console.log('Обработка файлов завершена!');
 }
 
 /*
@@ -142,4 +149,31 @@ export function deleteFilesWithArrowAttribute(jsonDir: string, outputFile: strin
       resolve();
     });
   });
+}
+
+export function findNFTsByAttributes(directory: string, attributes: { [traitType: string]: string }): NFT[] {
+  const nftFiles = fs.readdirSync(directory);
+  const matchingNFTs: NFT[] = [];
+
+  for (const file of nftFiles) {
+    const filePath = path.join(directory, file);
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const nft: NFT = JSON.parse(fileContent);
+
+    let matchesAllAttributes = true;
+    for (const traitType in attributes) {
+      const value = attributes[traitType];
+      const attribute = nft.attributes.find((attr) => attr.trait_type === traitType && attr.value === value);
+      if (!attribute) {
+        matchesAllAttributes = false;
+        break;
+      }
+    }
+
+    if (matchesAllAttributes) {
+      matchingNFTs.push(nft);
+    }
+  }
+
+  return matchingNFTs;
 }
