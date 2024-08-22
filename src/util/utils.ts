@@ -151,9 +151,13 @@ export function deleteFilesWithArrowAttribute(jsonDir: string, outputFile: strin
   });
 }
 
-export function findNFTsByAttributes(directory: string, attributes: { [traitType: string]: string }): NFT[] {
+export function findNFTsByAttributes(
+  directory: string,
+  attributes: { [traitType: string]: string },
+): [NFT[], string[]] {
   const nftFiles = fs.readdirSync(directory);
   const matchingNFTs: NFT[] = [];
+  const fileNames: string[] = [];
 
   for (const file of nftFiles) {
     const filePath = path.join(directory, file);
@@ -172,12 +176,12 @@ export function findNFTsByAttributes(directory: string, attributes: { [traitType
 
     if (matchesAllAttributes) {
       matchingNFTs.push(nft);
+      fileNames.push(file);
     }
   }
 
-  return matchingNFTs;
+  return [matchingNFTs, fileNames];
 }
-
 export function updateArrowAttribute(jsonDir: string) {
   fs.readdir(jsonDir, (err, files) => {
     if (err) {
