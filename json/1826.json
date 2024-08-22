@@ -1,0 +1,39 @@
+{
+  "name": "Taiga.labs NFT #1826",
+  "description": "Taiga.labs collection of NFTs",
+  "image": "https://gateway.pinata.cloud/1826.png",
+  "dna": "1c3b2bb0ee3490dfec296beba310edd937e9febf62b93234f458347149588c61ee0fa881c986f77e5053cc5b6cb9088e81764030d39555d489c60d8041c0696e",
+  "edition": 1826,
+  "date": 1723754346428,
+  "attributes": [
+    {
+      "trait_type": "bacground",
+      "value": "fon"
+    },
+    {
+      "trait_type": "northern",
+      "value": "northern_0"
+    },
+    {
+      "trait_type": "snow",
+      "value": "snow_0"
+    },
+    {
+      "trait_type": "spruce",
+      "value": "spruce"
+    },
+    {
+      "trait_type": "diamon",
+      "value": "diamond_3"
+    },
+    {
+      "trait_type": "arrow",
+      "value": "arrow_5"
+    },
+    {
+      "trait_type": "stars",
+      "value": "stars_3"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}

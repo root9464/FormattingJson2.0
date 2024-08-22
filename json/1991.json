@@ -1,0 +1,39 @@
+{
+  "name": "Taiga.labs NFT #1991",
+  "description": "Taiga.labs collection of NFTs",
+  "image": "https://gateway.pinata.cloud/1991.png",
+  "dna": "cdf0ab9c2e26a3dbb6f700d8f4004768443fc76593f916bb5737cc32b56e5020948a310230ba8cbd405a9363d221488762ac163886a904da9088bdea09cc77d3",
+  "edition": 1991,
+  "date": 1723754400007,
+  "attributes": [
+    {
+      "trait_type": "bacground",
+      "value": "fon"
+    },
+    {
+      "trait_type": "northern",
+      "value": "northern_2"
+    },
+    {
+      "trait_type": "snow",
+      "value": "snow_0"
+    },
+    {
+      "trait_type": "spruce",
+      "value": "spruce"
+    },
+    {
+      "trait_type": "diamon",
+      "value": "diamond_1"
+    },
+    {
+      "trait_type": "arrow",
+      "value": "arrow_5"
+    },
+    {
+      "trait_type": "stars",
+      "value": "stars_2"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}

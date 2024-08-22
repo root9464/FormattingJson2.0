@@ -1,0 +1,39 @@
+{
+  "name": "Taiga.labs NFT #2012",
+  "description": "Taiga.labs collection of NFTs",
+  "image": "https://gateway.pinata.cloud/2012.png",
+  "dna": "2e3fdfbe63345169b7f75243547b7d6572d8b68ddbd94c6ddfc9bc1ac79ee264433e9ec65de38946ed4a477f1c56753fe989959f25b4901b39db46e447f76782",
+  "edition": 2012,
+  "date": 1723754406665,
+  "attributes": [
+    {
+      "trait_type": "bacground",
+      "value": "fon"
+    },
+    {
+      "trait_type": "northern",
+      "value": "northern_3"
+    },
+    {
+      "trait_type": "snow",
+      "value": "snow_1"
+    },
+    {
+      "trait_type": "spruce",
+      "value": "spruce"
+    },
+    {
+      "trait_type": "diamon",
+      "value": "diamond_1"
+    },
+    {
+      "trait_type": "arrow",
+      "value": "arrow_2"
+    },
+    {
+      "trait_type": "stars",
+      "value": "stars_5"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}

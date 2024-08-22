@@ -1,0 +1,39 @@
+{
+  "name": "Taiga.labs NFT #5304",
+  "description": "Taiga.labs collection of NFTs",
+  "image": "https://gateway.pinata.cloud/5304.png",
+  "dna": "ffe1a3d6f14127935e0e48285e7c4f1b98e385de00586660e7f9a2e094d496f12963898a0e25e015f46ba437025acc76bc8e1f8c184dc7233ef035b8df2945dd",
+  "edition": 5304,
+  "date": 1723755449734,
+  "attributes": [
+    {
+      "trait_type": "bacground",
+      "value": "fon"
+    },
+    {
+      "trait_type": "northern",
+      "value": "northern_1"
+    },
+    {
+      "trait_type": "snow",
+      "value": "snow_0"
+    },
+    {
+      "trait_type": "spruce",
+      "value": "spruce"
+    },
+    {
+      "trait_type": "diamon",
+      "value": "diamond_8"
+    },
+    {
+      "trait_type": "arrow",
+      "value": "arrow_4"
+    },
+    {
+      "trait_type": "stars",
+      "value": "stars_7"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}
