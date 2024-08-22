@@ -77,31 +77,6 @@ export function processJsonFiles(jsonDir: string, removeAttributes: string[], re
   console.log('Обработка файлов завершена!');
 }
 
-/*
-  Удаляет файлы записанные в output.txt с атрибутом "arrow"
-*/
-
-export function deleteFilesWithArrowAttribute(jsonDir: string, outputFile: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    fs.readFile(outputFile, 'utf8', (err, data) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      const fileNamesToDelete = data.trim().split('\n');
-
-      fileNamesToDelete.forEach((fileName) => {
-        const filePath = path.join(jsonDir, fileName);
-        fs.unlinkSync(filePath);
-        console.log(`Удален файл ${filePath}`);
-      });
-
-      resolve();
-    });
-  });
-}
-
 export function updateArrowAttribute(jsonDir: string) {
   fs.readdir(jsonDir, (err, files) => {
     if (err) {
@@ -154,16 +129,4 @@ export function swapAttributesInJsonFiles(jsonDir: string) {
       console.log(`Изменены атрибуты в файле ${file}`);
     });
   });
-}
-
-export async function renameJsonFiles(jsonDir: string) {
-  const files = await fs.promises.readdir(jsonDir);
-
-  for (const file of files) {
-    const filePath = path.join(jsonDir, file);
-    const fileName = file.replace('.json', '');
-    const newFileName = `${parseInt(fileName) + 7920}.json`;
-
-    await fs.promises.rename(filePath, path.join(jsonDir, newFileName));
-  }
 }
