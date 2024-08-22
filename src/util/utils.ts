@@ -155,3 +155,15 @@ export function swapAttributesInJsonFiles(jsonDir: string) {
     });
   });
 }
+
+export async function renameJsonFiles(jsonDir: string) {
+  const files = await fs.promises.readdir(jsonDir);
+
+  for (const file of files) {
+    const filePath = path.join(jsonDir, file);
+    const fileName = file.replace('.json', '');
+    const newFileName = `${parseInt(fileName) + 7920}.json`;
+
+    await fs.promises.rename(filePath, path.join(jsonDir, newFileName));
+  }
+}

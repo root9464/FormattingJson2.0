@@ -25,6 +25,6 @@ export const attributesNF = {
   northern: 'northern_0', //Radiance == Less comission
   snow: 'snow_0', //Snowdrifts == DCA
   diamon: 'diamond_0', //Diamonds == Share or revenue
-  arrow: 'arrow_1', //Line dots == Refferals
-  stars: 'stars_1', //Stars == Priority
+  arrow: 'arrow_0', //Line dots == Refferals
+  stars: 'stars_9', //Stars == Priority
 };
