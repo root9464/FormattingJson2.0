@@ -104,6 +104,10 @@ export function updateArrowAttribute(jsonDir: string) {
   });
 }
 
+/* 
+  меняет атрибуты местами
+*/
+
 export function swapAttributesInJsonFiles(jsonDir: string) {
   fs.readdir(jsonDir, (err, files) => {
     if (err) {
@@ -117,8 +121,8 @@ export function swapAttributesInJsonFiles(jsonDir: string) {
       const jsonObject: NFT = JSON.parse(fileContent);
 
       const attributes = jsonObject.attributes;
-      const diamondsIndex = attributes.findIndex((attr) => attr.trait_type === 'Diamonds == Share or revenue');
-      const lineDotsIndex = attributes.findIndex((attr) => attr.trait_type === 'Line dots == Refferals');
+      const diamondsIndex = attributes.findIndex((attr) => attr.trait_type === 'Line dots == Refferals'); // что меняет
+      const lineDotsIndex = attributes.findIndex((attr) => attr.trait_type === 'Diamonds == Share or revenue'); // с чем меняет
 
       if (diamondsIndex !== -1 && lineDotsIndex !== -1) {
         [attributes[diamondsIndex], attributes[lineDotsIndex]] = [attributes[lineDotsIndex], attributes[diamondsIndex]];
