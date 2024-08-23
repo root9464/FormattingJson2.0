@@ -58,11 +58,11 @@ function transformArrowValue(value: string): string {
   return value;
 }
 
-export function transformAllNFTsInFolder(jsonDir: string): void {
-  const files = fs.readdirSync(jsonDir);
+export function transformAllNFTsInFolder(folderPath: string): void {
+  const files = fs.readdirSync(folderPath);
 
   files.forEach((file) => {
-    const filePath = path.join(jsonDir, file);
+    const filePath = path.join(folderPath, file);
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const nft: NFT = JSON.parse(fileContent);
 
