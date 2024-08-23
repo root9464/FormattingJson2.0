@@ -7,31 +7,31 @@
   "date": 1724356009978,
   "attributes": [
     {
-      "trait_type": "bacground",
+      "trait_type": "bg",
       "value": "fon"
     },
     {
-      "trait_type": "northern",
+      "trait_type": "Radiance",
       "value": "northern_00"
     },
     {
-      "trait_type": "snow",
-      "value": "snow_0"
+      "trait_type": "Snowdrifts",
+      "value": "snow_01"
     },
     {
       "trait_type": "spruce",
       "value": "spruce"
     },
     {
-      "trait_type": "arrow",
+      "trait_type": "Linedots",
       "value": "arrow_000"
     },
     {
-      "trait_type": "diamon",
+      "trait_type": "Diamonds",
       "value": "diamond_04"
     },
     {
-      "trait_type": "stars",
+      "trait_type": "Stars",
       "value": "stars_09"
     }
   ],
