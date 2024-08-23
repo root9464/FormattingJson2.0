@@ -1,0 +1,39 @@
+{
+  "name": "Your Collection #3245",
+  "description": "Remember to replace this description",
+  "image": "ipfs://NewUriToReplace/3245.png",
+  "dna": "1c2ee9a474355ba83e4333c38d447b4c675c9277af63e6aa30d93bec0496262a",
+  "edition": 3245,
+  "date": 1724356009978,
+  "attributes": [
+    {
+      "trait_type": "bacground",
+      "value": "fon"
+    },
+    {
+      "trait_type": "northern",
+      "value": "northern_00"
+    },
+    {
+      "trait_type": "snow",
+      "value": "snow_0"
+    },
+    {
+      "trait_type": "spruce",
+      "value": "spruce"
+    },
+    {
+      "trait_type": "arrow",
+      "value": "arrow_0"
+    },
+    {
+      "trait_type": "diamon",
+      "value": "diamond_04"
+    },
+    {
+      "trait_type": "stars",
+      "value": "stars_09"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}
