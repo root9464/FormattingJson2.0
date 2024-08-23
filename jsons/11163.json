@@ -1,10 +1,10 @@
 {
-  "name": "Your Collection #3245",
+  "name": "Your Collection #3243",
   "description": "Remember to replace this description",
-  "image": "ipfs://NewUriToReplace/3245.png",
-  "dna": "1c2ee9a474355ba83e4333c38d447b4c675c9277af63e6aa30d93bec0496262a",
-  "edition": 3245,
-  "date": 1724356009978,
+  "image": "ipfs://NewUriToReplace/3243.png",
+  "dna": "d7aa23daf890a3f82812977e8214bf3544516e230ab081e58e774bd0385fe5ec",
+  "edition": 3243,
+  "date": 1724356009611,
   "attributes": [
     {
       "trait_type": "bacground",
@@ -12,7 +12,7 @@
     },
     {
       "trait_type": "northern",
-      "value": "northern_00"
+      "value": "northern_04"
     },
     {
       "trait_type": "snow",
@@ -24,15 +24,15 @@
     },
     {
       "trait_type": "arrow",
-      "value": "arrow_000"
+      "value": "arrow_00"
     },
     {
       "trait_type": "diamon",
-      "value": "diamond_04"
+      "value": "diamond_02"
     },
     {
       "trait_type": "stars",
-      "value": "stars_09"
+      "value": "stars_07"
     }
   ],
   "compiler": "HashLips Art Engine"

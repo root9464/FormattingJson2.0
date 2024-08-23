@@ -26,50 +26,68 @@ export async function renameImageFiles(imgDir: string) {
   }
 }
 
-function transformNFT(nft: NFT): NFT {
-  const transformedAttributes: NFT['attributes'] = nft.attributes.map((attribute) => {
-    switch (attribute.trait_type) {
-      case 'bg':
-        return { trait_type: 'bacground', value: attribute.value };
-      case 'Radiance':
-        return { trait_type: 'northern', value: attribute.value.replace('_02', '_5') };
-      case 'Snowdrifts':
-        return { trait_type: 'snow', value: attribute.value.replace('_01', '_0') };
-      case 'Linedots':
-        return { trait_type: 'arrow', value: transformArrowValue(attribute.value) };
-      case 'Diamonds':
-        return { trait_type: 'diamon', value: attribute.value.replace('_09', '_1') };
-      case 'Stars':
-        return { trait_type: 'stars', value: attribute.value.replace('_08', '_9') };
-      default:
-        return attribute;
-    }
-  });
+const traitTypeMappings: { [key: string]: string } = {
+  Snowdrifts: 'snow',
+  Radiance: 'northern',
+  Linedots: 'arrow',
+  Diamonds: 'diamon',
+  Stars: 'stars',
+  bg: 'bacground',
+  spruce: 'spruce', // оставляем как есть, если нет соответствия
+};
 
-  return { ...nft, attributes: transformedAttributes };
+function transformJsonData(jsonData: NFT): NFT {
+  return {
+    ...jsonData,
+    attributes: jsonData.attributes.map((attribute) => {
+      const newTraitType = traitTypeMappings[attribute.trait_type];
+      return {
+        ...attribute,
+        trait_type: newTraitType || attribute.trait_type,
+      };
+    }),
+  };
+}
+function formatArrowValue(jsonData: NFT): NFT {
+  return {
+    ...jsonData,
+    attributes: jsonData.attributes.map((attribute) => {
+      if (attribute.trait_type === 'arrow') {
+        const value = attribute.value;
+        const match = value.match(/^arrow_(\d+)$/);
+        if (match) {
+          const num = parseInt(match[1], 10);
+          if (num === 0) {
+            return {
+              ...attribute,
+              value: `arrow_0`,
+            };
+          } else if (num < 10) {
+            return {
+              ...attribute,
+              value: `arrow_${num}`,
+            };
+          } else {
+            const formattedNum = (num + 1).toString();
+            return {
+              ...attribute,
+              value: `arrow_${formattedNum}`,
+            };
+          }
+        }
+      }
+      return attribute;
+    }),
+  };
 }
 
-function transformArrowValue(value: string): string {
-  const match = value.match(/^arrow_(\d+)$/);
-  if (match) {
-    const num = parseInt(match[1], 10);
-    return `arrow_${num > 0 ? num - 1 : 0}`;
-  }
-  return value;
-}
-
-export function transformAllNFTsInFolder(folderPath: string): void {
-  const files = fs.readdirSync(folderPath);
+export function formatingLowerCaseJsons(jsonDir: string) {
+  const files = fs.readdirSync(jsonDir);
 
   files.forEach((file) => {
-    const filePath = path.join(folderPath, file);
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const nft: NFT = JSON.parse(fileContent);
-
-    const transformedNFT = transformNFT(nft);
-
-    const transformedFileContent = JSON.stringify(transformedNFT, null, 2);
-
-    fs.writeFileSync(filePath, transformedFileContent);
+    const filePath = path.join(jsonDir, file);
+    const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8')) as NFT;
+    const formattedJsonData = formatArrowValue(jsonData);
+    fs.writeFileSync(filePath, JSON.stringify(formattedJsonData, null, 2));
   });
 }
